@@ -1,0 +1,15 @@
+@import "./textFont.module";
+
+.customInput {
+  height: 30px;
+  background-color: #E8E8E8;
+  padding-left: 10px;
+  border: 0;
+  border-radius: 34px;
+}
+
+.customInput::placeholder {
+  @extend .textFontLogin;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+}

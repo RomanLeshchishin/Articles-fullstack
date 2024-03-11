@@ -1,0 +1,54 @@
+@import "textFont.module";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  width: 385px;
+  height: 627px;
+  background-color: white;
+  border-radius: 50px;
+
+  .label {
+    @extend .textFontLogin;
+    background: linear-gradient(to right, #5FB0FB, #5200FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: cornflowerblue;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .formInput {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 257px;
+    height: 207px;
+  }
+
+  .account{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    .accountText{
+      @extend .textFontLogin;
+      opacity: 0.75;
+    }
+
+    .accountLink{
+      @extend .textFontLogin;
+      color: #0B7BFF;
+      background-color: white;
+      text-decoration: none;
+      border: none;
+    }
+
+    .accountLink:focus:active:hover{
+      cursor: pointer;
+    }
+  }
+}

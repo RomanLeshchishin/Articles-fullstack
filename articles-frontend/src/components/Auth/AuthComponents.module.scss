@@ -1,0 +1,50 @@
+@import "../../styles/textFont.module";
+@import "../../styles/customInput.module";
+@import "../../styles/form.module";
+@import "../../styles/customBtn.module";
+
+.authorization {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#5FB0FB, #5200FF);
+
+  .formRegistration {
+   @extend .form;
+  }
+
+  .formLogin {
+    @extend .form;
+    gap: 20px;
+    width: 385px;
+    height: 327px;
+
+    .formInput {
+      gap: 28px;
+      width: 257px;
+      height: 87px;
+    }
+
+    .account {
+      gap: 5px;
+    }
+  }
+}
+
+.customInput {
+  @extend .customInput;
+}
+
+.customButtonRegistration {
+  @extend .customButton;
+}
+
+.customButtonLogin {
+  @extend .customButton;
+  padding: 12px 22px;
+}

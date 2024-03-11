@@ -1,0 +1,10 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+/articles-backend/.env
+/articles-backend/node_modules
+/articles-backend/dist
+/articles-frontend/node_modules
+.idea
