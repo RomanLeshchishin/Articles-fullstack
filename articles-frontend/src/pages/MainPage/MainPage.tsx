@@ -1,9 +1,9 @@
-import Header from "../../components/Header/Header.tsx";
+import Navbar from "../../components/Navbar/Navbar.tsx";
 
 const MainPage = () => {
     return (
         <div>
-            <Header/>
+            <Navbar/>
         </div>
     );
 };

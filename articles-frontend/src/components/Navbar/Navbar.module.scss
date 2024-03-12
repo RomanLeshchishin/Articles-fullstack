@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  position: sticky;
+  background-color: #5FB0FB;
+  top: 0;
+  gap: 725px;
+
+  .logo{
+    display: block;
+    text-align: center;
+    color: white;
+    padding: 15px 5px;
+  }
+
+  .navLinkBlock {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+
+    .navLink {
+      display: block;
+      text-align: center;
+      color: white;
+      padding: 15px 5px;
+      text-decoration: none;
+    }
+  }
+}
