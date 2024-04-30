@@ -12,7 +12,7 @@ export class AuthController {
         return this.authService.login(dto)
     }
 
-    @Post('/registration')
+    @Post('/register')
     registration(@Body() dto: CreateUserDto) {
         return this.authService.registration(dto)
     }
