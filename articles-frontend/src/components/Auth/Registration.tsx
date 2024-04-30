@@ -3,6 +3,8 @@ import ShowHidePassword from "./ShowHidePassword.tsx";
 import { useNavigate } from "react-router-dom";
 import {useState} from "react";
 import {AuthData} from "../../models/AuthResponse.ts";
+import {useAppDispatch} from "../../hooks/redux.ts";
+import {registerUser} from "../../store/actions/authActions.ts";
 
 const Registration = () => {
     const navigate = useNavigate()
@@ -11,8 +13,10 @@ const Registration = () => {
 		email: '',
 		password: ''
 	})
-	const registration = (inputData: AuthData) => {
-
+	const dispatch = useAppDispatch()
+	const registration = async (inputData: AuthData) => {
+		await dispatch(registerUser(inputData))
+		navigate('/')
 	}
 
     return (
