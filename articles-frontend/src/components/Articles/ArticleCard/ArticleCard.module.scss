@@ -1,0 +1,63 @@
+@import "../../../styles/textFont.module";
+
+.card {
+  display: flex;
+  flex-direction: row;
+  width: 648px;
+
+  .img {
+    width: 240px;
+    height: 227px;
+    border-radius: 8px 0 0 8px;
+  }
+
+  .upperBlock {
+    display: flex;
+    flex-direction: column;
+    width: 408px;
+    padding: 15px;
+    gap: 15px;
+    background: white;
+    border-radius: 0 8px 8px 0;
+
+    .titleTech {
+      @extend .textBasic;
+      color: #0B7BFF;
+    }
+
+    .mainInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title {
+        @extend .textTitle;
+        width: 368px;
+      }
+
+      .description {
+        @extend .textBasic;
+        width: 368px;
+      }
+    }
+
+    .lowerBlock {
+      display: flex;
+      flex-direction: column;
+
+      .additionalInfo {
+        display: flex;
+        flex-direction: row;
+        gap: 217px;
+
+        .blockViews {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+    }
+  }
+
+}
