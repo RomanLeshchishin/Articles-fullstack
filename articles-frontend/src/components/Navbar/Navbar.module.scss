@@ -1,11 +1,14 @@
+@import "../../styles/textFont.module";
+
 .navbar {
   display: flex;
   flex-direction: row;
   overflow: hidden;
   position: sticky;
+  padding: 0 10px 0 10px;
   background-color: #5FB0FB;
   top: 0;
-  gap: 725px;
+  gap: 696px;
 
   .logo{
     display: block;
@@ -22,11 +25,16 @@
     align-items: center;
 
     .navLink {
+      @extend .textNav;
       display: block;
       text-align: center;
       color: white;
       padding: 15px 5px;
       text-decoration: none;
+    }
+
+    .navLink:hover {
+      cursor: pointer;
     }
   }
 }

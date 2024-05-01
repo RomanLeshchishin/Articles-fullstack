@@ -12,7 +12,7 @@
   border-radius: 50px;
 
   .label {
-    @extend .textFontLogin;
+    @extend .textLogin;
     background: linear-gradient(to right, #5FB0FB, #5200FF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -35,12 +35,12 @@
     gap: 10px;
 
     .accountText{
-      @extend .textFontLogin;
+      @extend .textLogin;
       opacity: 0.75;
     }
 
     .accountLink{
-      @extend .textFontLogin;
+      @extend .textLogin;
       color: #0B7BFF;
       background-color: white;
       text-decoration: none;

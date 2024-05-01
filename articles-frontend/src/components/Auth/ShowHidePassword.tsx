@@ -3,7 +3,7 @@ import {Eye, EyeSlash} from "react-bootstrap-icons";
 import styles from './ShowHidePassword.module.scss';
 import {AuthData} from "../../models/AuthResponse.ts";
 
-export interface InputProps{
+interface InputProps{
     textPlaceholder: string;
 	inputData: AuthData;
 	setInputData: Dispatch<SetStateAction<AuthData>>;

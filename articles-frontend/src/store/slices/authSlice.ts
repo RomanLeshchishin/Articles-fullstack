@@ -29,6 +29,7 @@ const authSlice = createSlice({
 				state.error = '';
 				state.user = decodeToken(action.payload)
 				localStorage.setItem('token', action.payload.token)
+				localStorage.setItem('name', action.payload.name)
 			}
 		);
 
@@ -54,6 +55,7 @@ const authSlice = createSlice({
 				state.error = '';
 				state.user = decodeToken(action.payload)
 				localStorage.setItem('token', action.payload.token)
+				localStorage.setItem('name', action.payload.name)
 			}
 		);
 

@@ -30,7 +30,7 @@ const Registration = () => {
 						value={userData.name}
 						onChange={
 						(event) => setUserData({...userData, name: event.target.value})
-					}
+						}
 					/>
                     <input
 						className={styles.customInput}

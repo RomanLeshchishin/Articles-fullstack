@@ -1,9 +1,13 @@
 import styles from "./Navbar.module.scss";
-import {Link} from "react-router-dom";
-import {useAppSelector} from "../../hooks/redux.ts";
+import {Link, useNavigate} from "react-router-dom";
 
 const Navbar = () => {
-	const {user} = useAppSelector(state => state.authReducer)
+	const navigate = useNavigate()
+	const logOut = () => {
+		localStorage.clear()
+		navigate('/')
+	}
+
     return (
         <div className={styles.navbar}>
             <div className={styles.logo}>Лого</div>
@@ -11,7 +15,12 @@ const Navbar = () => {
                 <Link to={''} className={styles.navLink}>Статьи</Link>
                 <Link to={''} className={styles.navLink}>Авторы</Link>
             </div>
-			{user.name !== undefined ? user.name :
+			{localStorage.getItem('name') !== null ?
+				<div className={styles.navLinkBlock}>
+					<div>{localStorage.getItem('name')}</div>
+					<div onClick={logOut} className={styles.navLink}>Выйти</div>
+				</div>
+				:
 				<div className={styles.navLinkBlock}>
 					<Link to={'/login'} className={styles.navLink}>Войти</Link>
 					<Link to={'/registration'} className={styles.navLink}>Зарегистрироваться</Link>
