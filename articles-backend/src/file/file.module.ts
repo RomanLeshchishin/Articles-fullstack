@@ -1,17 +1,12 @@
 import { Module } from '@nestjs/common';
 import { FileController } from './file.controller';
 import { FileService } from './file.service';
-import {ServeStaticModule} from "@nestjs/serve-static";
-import {join} from "path";
+import {SequelizeModule} from "@nestjs/sequelize";
+import {UploadFile} from "./file.model";
 
 @Module({
   controllers: [FileController],
   providers: [FileService],
-	imports: [
-		ServeStaticModule.forRoot({
-			rootPath: join(__dirname, '..', '..', '/static'),
-			serveRoot: '/static'
-		})
-	]
+	imports: [SequelizeModule.forFeature([UploadFile])]
 })
 export class FileModule {}

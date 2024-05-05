@@ -1,33 +1,34 @@
-import {Injectable, InternalServerErrorException} from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 import {MFile} from "./MFile.class";
 import {v4 as uuidv4} from "uuid";
 import sharp from "sharp";
-import {join} from "path";
-import { access, mkdir, writeFile } from "fs/promises";
-import {FileResponse} from "./file.interface";
+import {InjectModel} from "@nestjs/sequelize";
+import {UploadFile} from "./file.model";
 
 @Injectable()
 export class FileService {
-	async saveFiles(newFiles: MFile[], folder = 'default') {
-		const uploadFolder = join(__dirname, '..', '..', folder)
+	constructor(@InjectModel(UploadFile) private UploadFileRepository: typeof UploadFile) {}
 
-		try {
-			await access(uploadFolder);
-		} catch (e) {
-			await mkdir(uploadFolder, { recursive: true });
+	async saveFileToDatabase(fileBuffer: Buffer, filename: string) {
+		const newFile = await this.UploadFileRepository.create({
+			filename,
+			file: fileBuffer
+		})
+		return {id: newFile.id, filename: newFile.filename};
+	}
+
+	async getFileById(id: number) {
+		const file = await this.UploadFileRepository.findOne({where: {id}})
+		if (!file) {
+			throw new NotFoundException();
 		}
+		return file;
+	}
 
-		const res: FileResponse[] = await Promise.all(newFiles.map(async file => {
-			try {
-				console.log(file.buffer)
-				await writeFile(join(uploadFolder, file.originalname), file.buffer)
-			} catch (e) {
-				throw new InternalServerErrorException('Ошибка при записи файлов');
-			}
-			return {
-				url: `/static/${folder}/${file.originalname}`,
-				name: file.originalname
-			};
+	async saveFiles(newFiles: MFile[]) {
+		const res = await Promise.all(newFiles.map(async file => {
+			const newFile = await this.saveFileToDatabase(file.buffer, file.originalname)
+			return newFile;
 		}))
 		return res;
 	}
@@ -40,7 +41,6 @@ export class FileService {
 		const newFiles = await Promise.all(
 			files.map( async file => {
 				const mimetype = file.mimetype
-				console.log(mimetype)
 				const currentFileType = mimetype.split('/')[1]
 				const newName = uuidv4()
 				const type = file.originalname.split('.')[1]
