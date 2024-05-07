@@ -7,6 +7,6 @@ import {UploadFile} from "./file.model";
 @Module({
   controllers: [FileController],
   providers: [FileService],
-	imports: [SequelizeModule.forFeature([UploadFile])]
+  imports: [SequelizeModule.forFeature([UploadFile])]
 })
 export class FileModule {}

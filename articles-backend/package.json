@@ -29,6 +29,7 @@
     "@nestjs/sequelize": "^10.0.1",
     "@nestjs/serve-static": "^4.0.2",
     "bcryptjs": "^2.4.3",
+    "class-validator": "^0.14.1",
     "express": "^4.19.2",
     "fs.promises": "^0.1.2",
     "passport-jwt": "^4.0.1",
