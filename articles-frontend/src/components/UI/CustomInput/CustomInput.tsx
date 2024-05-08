@@ -1,26 +1,15 @@
-import {AuthData} from "../../../models/AuthResponse.ts";
 import styles from "../../../styles/_customInput.module.scss"
 import {Dispatch, SetStateAction} from "react";
+import {inputHeight, inputWidth} from "../../../const.ts";
 
 interface CustomInputProps {
 	inpWidth: inputWidth;
 	inpHeight: inputHeight;
 	label?: string;
 	textPlaceholder?: string;
-	inputData: AuthData;
-	setInputData: Dispatch<SetStateAction<AuthData>>;
+	inputData: string;
+	setInputData: Dispatch<SetStateAction<string>>;
 	required: boolean;
-}
-
-enum inputWidth {
-	sw = '207px',
-	mw = '280px',
-	lw = '433px'
-}
-
-enum inputHeight {
-	mw = '30px',
-	lw = '40px'
 }
 
 const CustomInput = (
@@ -35,17 +24,17 @@ const CustomInput = (
 	} : CustomInputProps) => {
 	return (
 		<div>
-			<div>
-				<div>{label}</div>
+			<div style={{display: "flex", flexDirection: "row", gap: "5px"}}>
+				<div className={styles.textBasic} style={{fontSize: "18px"}}>{label}</div>
 				{required ? <div style={{color: "red"}}>*</div> : <div></div>}
 			</div>
 			<input
 				style={{width: inpWidth, height: inpHeight}}
 				className={styles.customInput}
 				placeholder={textPlaceholder}
-				value={inputData.name}
+				value={inputData}
 				onChange={(event) =>
-					setInputData({...inputData, name: event.target.value})
+					setInputData(event.target.value)
 				}
 			>
 			</input>

@@ -1,0 +1,125 @@
+@import "../../styles/textFont.module";
+@import "../../styles/customBtn.module";
+@import "../../styles/customInput.module";
+
+.appForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  border-radius: 50px;
+  background: white;
+  width: 844px;
+  padding: 30px 50px 30px 50px;
+
+  .title {
+    @extend .textBlueGradient;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .inpForm {
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+
+    .infoForm {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      .rowInp {
+        display: flex;
+        flex-direction: row;
+        gap: 18px;
+      }
+
+      .dateForm {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .labelDate {
+          @extend .textLogin;
+        }
+
+        .inpDate {
+          @extend .customInput;
+          padding: 5px 10px 5px 10px;
+          outline: none;
+          resize: none;
+        }
+      }
+    }
+
+    .uploadForm {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+
+      .imgForm {
+        width: 232px;
+        height: 178px;
+      }
+
+      .labelUpload {
+        position: relative;
+        display: inline-block;
+      }
+
+      .labelUpload span {
+        @extend .textLogin;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+        width: 172px;
+        color: white;
+        text-align: center;
+        border-radius: 15px;
+        background-color: #399DFA;
+        padding: 10px 0 10px 0;
+      }
+
+      .labelUpload input[type=file] {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        display: block;
+        width: 0;
+        height: 0;
+      }
+
+      .labelUpload:active span {
+        background-color: #0B8BFF;
+      }
+
+      .labelUpload input[type=file]:disabled + span {
+        background-color: #eee;
+      }
+
+
+      .btnUpload {
+        @extend .customGradientButton;
+        background: #399DFA;
+        width: 172px;
+        border-radius: 15px;
+        padding: 10px 0 10px 0;
+        color: white;
+      }
+
+      .btnUpload:active {
+        background: #0B8BFF;
+      }
+    }
+  }
+
+  .btnSend {
+    @extend .customGradientButton;
+    padding: 10px 30px 10px 30px;
+    color: white;
+  }
+}

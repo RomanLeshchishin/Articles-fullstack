@@ -27,9 +27,9 @@ const authSlice = createSlice({
 			(state, action: PayloadAction<AuthResponse>) => {
 				state.isLoading = false;
 				state.error = '';
-				state.user = decodeToken(action.payload)
 				localStorage.setItem('token', action.payload.token)
 				localStorage.setItem('name', action.payload.name)
+				state.user = decodeToken(action.payload.token);
 			}
 		);
 
@@ -53,9 +53,9 @@ const authSlice = createSlice({
 			(state, action: PayloadAction<AuthResponse>) => {
 				state.isLoading = false;
 				state.error = '';
-				state.user = decodeToken(action.payload)
 				localStorage.setItem('token', action.payload.token)
 				localStorage.setItem('name', action.payload.name)
+				state.user = decodeToken(action.payload.token)
 			}
 		);
 

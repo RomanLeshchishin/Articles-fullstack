@@ -12,11 +12,7 @@
   border-radius: 50px;
 
   .label {
-    @extend .textLogin;
-    background: linear-gradient(to right, #5FB0FB, #5200FF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: cornflowerblue;
+    @extend .textBlueGradient;
     font-size: 20px;
     font-weight: 700;
   }

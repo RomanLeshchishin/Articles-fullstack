@@ -41,10 +41,11 @@
 }
 
 .customButtonRegistration {
-  @extend .customButton;
+  @extend .customGradientButton;
+  padding: 15px 30px;
 }
 
 .customButtonLogin {
-  @extend .customButton;
+  @extend .customGradientButton;
   padding: 12px 22px;
 }
