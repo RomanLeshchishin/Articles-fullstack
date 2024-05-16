@@ -21,7 +21,7 @@ const Application = () => {
 	)
 	const [date, setDate] = useState<string>('')
 	const [about, setAbout] = useState<string>('')
-	const [filename, setFileName] = useState<string>('Загрузить')
+	const [filename, setFileName] = useState<string>('')
 	const [selectedFile, setSelectedFile] = useState(null)
 
 	const onChangeUploadFile = (event) => {
@@ -100,13 +100,17 @@ const Application = () => {
 					</div>
 				</div>
 				<div className={styles.uploadForm}>
-					<img src={fileIcon} alt={'file'} className={styles.imgForm}/>
+					<div className={styles.contentUpload}>
+						<img src={fileIcon} alt={'file'} className={styles.imgForm}/>
+						<div>{filename}</div>
+					</div>
 					<label className={styles.labelUpload}>
 						<input
 							type={"file"}
 							name={"file"}
-							onChange={onChangeUploadFile}/>
-						<span>{filename}</span>
+							onChange={onChangeUploadFile}
+						/>
+						<span>Загрузить</span>
 					</label>
 				</div>
 			</div>
