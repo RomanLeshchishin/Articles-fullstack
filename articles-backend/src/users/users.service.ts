@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {HttpStatus, Injectable} from '@nestjs/common';
 import {InjectModel} from "@nestjs/sequelize";
 import {User} from "./users.model";
 import {CreateUserDto} from "./dto/create-user.dto";
@@ -26,4 +26,14 @@ export class UsersService {
         const user = await this.userRepository.findOne({where: {email}, include: Role})
         return user;
     }
+
+	async updateUserRoles(id: string, value: string) {
+		const user = await this.userRepository.findOne({ where: {id}, include: Role })
+		const role = await this.roleService.getRoleByValue(value)
+		const roleIds = user.roles.map((role) => role.id)
+		await user.$set('roles', [...roleIds, role.id])
+		user.roles = [...user.roles, role]
+		user.save()
+		return HttpStatus.OK;
+	}
 }

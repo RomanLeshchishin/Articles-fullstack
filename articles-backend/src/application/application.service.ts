@@ -20,6 +20,7 @@ export class ApplicationService {
 		return application;
 	}
 
+	//for admin
 	async getAllApplications(){
 		const applications = await this.applicationRepository.findAll()
 		return applications;
