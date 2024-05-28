@@ -17,7 +17,7 @@ export class ApplicationController {
 		return this.applicationService.getAllApplications();
 	}
 
-	@Get(':userId') //проверка на роль админ
+	@Get('/user/:userId') //проверка на роль админ
 	getByUserId(@Param('userId') userId: number) {
 		return this.applicationService.getApplicationByUserId(userId);
 	}

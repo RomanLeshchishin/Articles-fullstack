@@ -29,7 +29,7 @@ export class FileController {
 		return this.fileService.saveFiles(newFiles);
 	}
 
-	@Get(':id')
+	@Get('/:id')
 	async getFileFromDatabaseById(@Param('id') id: number,  @Res({ passthrough: true }) response: Response) {
 		const file = await this.fileService.getFileById(id)
 		const stream = Readable.from(file.file)

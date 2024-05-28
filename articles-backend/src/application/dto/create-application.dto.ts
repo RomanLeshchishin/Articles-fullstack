@@ -13,6 +13,5 @@ export class CreateApplicationDto{
 
 	@MaxLength(400)
 	readonly about: string;
-
 	readonly fileId: number;
 }
