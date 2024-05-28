@@ -9,8 +9,8 @@
   gap: 30px;
   border-radius: 50px;
   background: white;
-  width: 844px;
-  padding: 30px 50px 30px 50px;
+  width: 900px;
+  padding: 30px 25px 30px 50px;
 
   .title {
     @extend .textBlueGradient;
@@ -21,7 +21,7 @@
   .inpForm {
     display: flex;
     flex-direction: row;
-    gap: 70px;
+    gap: 10px;
 
     .infoForm {
       display: flex;
@@ -32,6 +32,24 @@
         display: flex;
         flex-direction: row;
         gap: 18px;
+
+        .customInpSmall {
+          @extend .customInput;
+          width: 280px;
+          height: 40px;
+        }
+      }
+
+      .inpBlock {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .customInp {
+        @extend .customInput;
+        width: 433px;
+        height: 40px;
       }
 
       .dateForm {

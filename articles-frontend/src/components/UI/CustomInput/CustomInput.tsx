@@ -1,5 +1,4 @@
 import styles from "../../../styles/_customInput.module.scss"
-import {Dispatch, SetStateAction} from "react";
 import {inputHeight, inputWidth} from "../../../const.ts";
 
 interface CustomInputProps {
@@ -7,9 +6,9 @@ interface CustomInputProps {
 	inpHeight: inputHeight;
 	label?: string;
 	textPlaceholder?: string;
-	inputData: string;
-	setInputData: Dispatch<SetStateAction<string>>;
 	required: boolean;
+	register: any;
+	id: string;
 }
 
 const CustomInput = (
@@ -19,8 +18,8 @@ const CustomInput = (
 		textPlaceholder,
 		label,
 		required,
-		inputData,
-		setInputData
+		register,
+		id
 	} : CustomInputProps) => {
 	return (
 		<div>
@@ -32,10 +31,8 @@ const CustomInput = (
 				style={{width: inpWidth, height: inpHeight}}
 				className={styles.customInput}
 				placeholder={textPlaceholder}
-				value={inputData}
-				onChange={(event) =>
-					setInputData(event.target.value)
-				}
+				ref={register}
+				id={id}
 			>
 			</input>
 		</div>

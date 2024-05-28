@@ -1,18 +1,17 @@
 import styles from './AuthComponents.module.scss';
-import ShowHidePassword from "./ShowHidePassword.tsx";
 import { useNavigate } from "react-router-dom";
-import {useState} from "react";
 import {AuthData} from "../../models/AuthResponse.ts";
 import {useAppDispatch} from "../../hooks/redux.ts";
 import {registerUser} from "../../store/actions/authActions.ts";
+import {useForm} from "react-hook-form";
 
 const Registration = () => {
-    const navigate = useNavigate()
-	const [userData, setUserData] = useState<AuthData>({
-		name: '',
-		email: '',
-		password: ''
-	})
+	const navigate = useNavigate()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }
+	} = useForm<{name: string, email: string, password: string}>();
 	const dispatch = useAppDispatch()
 	const registration = async (inputData: AuthData) => {
 		await dispatch(registerUser(inputData))
@@ -24,31 +23,53 @@ const Registration = () => {
             <div className={styles.formRegistration}>
                 <div className={styles.label}>Начни с создания аккаунта</div>
                 <div className={styles.formInput}>
+									<div style={{display: "flex", flexDirection: "column", gap: "2px"}}>
                     <input
-						className={styles.customInput}
-						placeholder={'Имя'}
-						value={userData.name}
-						onChange={
-						(event) => setUserData({...userData, name: event.target.value})
-						}
-					/>
-                    <input
-						className={styles.customInput}
-						placeholder={'Email'}
-						value={userData.email}
-						onChange={
-						(event) => setUserData({...userData, email: event.target.value})
-						}
-					/>
-                    <ShowHidePassword
-						textPlaceholder={'Пароль'}
-						inputData={userData}
-						setInputData={setUserData}
-					/>
+											className={styles.customInput}
+											placeholder={'Имя'}
+											{...register("name", {
+												required: true,
+												pattern: /^[A-Za-z]+$/i,
+												maxLength: {
+													value: 20,
+													message: 'Username должно быть не более 20 символов'
+												}
+											})}
+										/>
+										<div style={{fontSize: "12px", color: "red"}}>{errors.name?.message}</div>
+									</div>
+									<div style={{display: "flex", flexDirection: "column", gap: "2px"}}>
+										<input
+											className={styles.customInput}
+											placeholder={'Email'}
+											{...register("email", {
+												required: true,
+												pattern: {
+													value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+													message: "Неправильный email адрес"
+												}
+											})}
+										/>
+										<div style={{fontSize: "12px", color: "red"}}>{errors.email?.message}</div>
+									</div>
+									<div style={{display: "flex", flexDirection: "column", gap: "2px"}}>
+										<input
+											className={styles.customInput}
+											placeholder={'Пароль'}
+											{...register("password", {
+												required: true,
+												minLength: {
+													value: 5,
+													message: 'Пароль должно быть больше 4 символов'
+												}
+											})}
+										/>
+										<div style={{fontSize: "12px", color: "red"}}>{errors.password?.message}</div>
+									</div>
                 </div>
                 <button
 					className={styles.customButtonRegistration}
-					onClick={() => registration(userData)}
+					onClick={handleSubmit(registration)}
 				>
 					Зарегистрироваться
 				</button>
