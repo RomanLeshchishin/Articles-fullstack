@@ -5,17 +5,24 @@ import Login from "./components/Auth/Login.tsx";
 import MainPage from "./pages/MainPage/MainPage.tsx";
 import Layout from "./components/UI/Layout/Layout.tsx";
 import Application from "./components/Application/Application.tsx";
+import UserTable from "./components/AdminPanel/userTable/userTable.tsx";
+import LayoutAdmin from "./components/UI/Layout/LayoutAdmin.tsx";
+import ApplicationTable from "./components/AdminPanel/applicationTable/ApplicationTable.tsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-		  <Route element={<Layout/>}>
-			  <Route path={'/'} element={<MainPage />}/>
-			  <Route path={'/create-application'} element={<Application />}/>
-		  </Route>
-          <Route path={'/login'} element={<Login />}/>
-          <Route path={'/registration'} element={<Registration />}/>
+				<Route element={<Layout/>}>
+					<Route path={'/'} element={<MainPage />}/>
+					<Route path={'/create-application'} element={<Application />}/>
+				</Route>
+				<Route element={<LayoutAdmin/>}>
+					<Route path={'/admin-application-table'} element={<ApplicationTable />}/>
+					<Route path={'/admin-user-table'} element={<UserTable />}/>
+				</Route>
+				<Route path={'/login'} element={<Login />}/>
+				<Route path={'/registration'} element={<Registration />}/>
       </Routes>
     </BrowserRouter>
   )

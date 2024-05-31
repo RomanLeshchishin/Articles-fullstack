@@ -6,4 +6,5 @@ export interface IApplication {
 	email: string;
 	date: string;
 	about: string;
+	fileId: number;
 }
