@@ -41,5 +41,11 @@ export class FileController {
 
 		return new StreamableFile(stream)
 	}
+
+	@Post('/create-excel')
+	async createExcelFile() {
+		const status = await this.fileService.createExcelFile()
+		return status;
+	}
 }
 

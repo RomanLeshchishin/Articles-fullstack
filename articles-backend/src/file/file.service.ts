@@ -1,13 +1,21 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {HttpStatus, Injectable, NotFoundException} from '@nestjs/common';
 import {MFile} from "./MFile.class";
 import {v4 as uuidv4} from "uuid";
 import sharp from "sharp";
 import {InjectModel} from "@nestjs/sequelize";
 import {UploadFile} from "./file.model";
+import ExcelJS from 'exceljs';
+import {UsersService} from "../users/users.service";
+import {IUserTable} from "./file.interface";
+import {ApplicationService} from "../application/application.service";
 
 @Injectable()
 export class FileService {
-	constructor(@InjectModel(UploadFile) private UploadFileRepository: typeof UploadFile) {}
+	constructor(
+		@InjectModel(UploadFile) private UploadFileRepository: typeof UploadFile,
+		private usersService: UsersService,
+		private applicationService: ApplicationService
+	) {}
 
 	async saveFileToDatabase(fileBuffer: Buffer, filename: string) {
 		const newFile = await this.UploadFileRepository.create({
@@ -69,5 +77,31 @@ export class FileService {
 			)
 		)
 		return newFiles;
+	}
+
+	async createExcelFile() {
+		const users = await this.usersService.getAllUsers()
+		// const applications = await Promise.all(users.map(async (user) => {
+		// 	const app = await this.applicationService.getApplicationByUserId(user.id)
+		// 	return app.fileId;
+		// }))
+		// console.log(applications)
+		const date = new Date().getTime()
+		const workbook = new ExcelJS.Workbook();
+		const worksheet = workbook.addWorksheet(`users`)
+		worksheet.columns = [
+			{ header: 'No', key: 'no'},
+			{ header: 'Name', key: 'name'},
+			{ header: 'Email', key: 'email'},
+			{ header: 'Roles', key: 'roles'}
+		]
+		let data: IUserTable[] = users.map((user, count) => {
+			return { no: count.toString(), name: user.name, email: user.email, roles: user.roles}
+		})
+		data.forEach((val,i,_) => {
+			worksheet.addRow(val)
+		})
+		await workbook.xlsx.writeFile(`users-${date}.xlsx`)
+		return HttpStatus.OK;
 	}
 }

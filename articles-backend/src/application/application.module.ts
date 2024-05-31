@@ -7,6 +7,7 @@ import {Application} from "./application.model";
 @Module({
   controllers: [ApplicationController],
   providers: [ApplicationService],
-  imports: [SequelizeModule.forFeature([Application])]
+  imports: [SequelizeModule.forFeature([Application])],
+	exports: [ApplicationService]
 })
 export class ApplicationModule {}

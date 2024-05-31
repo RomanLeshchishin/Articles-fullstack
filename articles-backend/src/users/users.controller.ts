@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Put, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, UseGuards} from '@nestjs/common';
 import {CreateUserDto} from "./dto/create-user.dto";
 import {UsersService} from "./users.service";
 import JwtAuthenticationGuard from "../auth/jwt-authentication.guard";
@@ -22,5 +22,11 @@ export class UsersController {
 	@UseGuards(JwtAuthenticationGuard)
 	updateRoles(@Body() updateRoleDto: { id: string, value: string }) {
 		return this.userService.updateUserRoles(updateRoleDto.id, updateRoleDto.value)
+	}
+
+	@Put('/del')
+	@UseGuards(JwtAuthenticationGuard)
+	deleteRole(@Body() delRoleDto: {id: string}) {
+			return this.userService.deleteUserRole(delRoleDto.id)
 	}
 }

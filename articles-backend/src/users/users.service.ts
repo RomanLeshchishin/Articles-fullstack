@@ -22,7 +22,7 @@ export class UsersService {
         return users;
     }
 
-    async getUserByEmail(email: string) {
+		async getUserByEmail(email: string) {
         const user = await this.userRepository.findOne({where: {email}, include: Role})
         return user;
     }
@@ -34,6 +34,14 @@ export class UsersService {
 		await user.$set('roles', [...roleIds, role.id])
 		user.roles = [...user.roles, role]
 		user.save()
-		return HttpStatus.OK;
+		return user.id;
+	}
+
+	async deleteUserRole(id: string) {
+		const user = await this.userRepository.findOne({ where: {id}, include: Role })
+		const role = await this.roleService.getRoleByValue("USER")
+		await user.$set('roles', [role.id])
+		user.roles = [role]
+		return user.id;
 	}
 }

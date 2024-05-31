@@ -2,6 +2,12 @@ import {BelongsToMany, Column, DataType, Model, Table} from "sequelize-typescrip
 import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-roles.model";
 
+interface UserAdditionalInf {
+	surname: string;
+	age: number;
+	avatar: number;
+	interests: string[];
+}
 
 interface UserCreationAttr {
     name: string;
