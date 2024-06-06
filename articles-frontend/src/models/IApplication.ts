@@ -6,5 +6,8 @@ export interface IApplication {
 	email: string;
 	date: string;
 	about: string;
+}
+
+export interface IApplicationWithId extends IApplication{
 	fileId: number;
 }

@@ -1,0 +1,45 @@
+@import "../../styles/textFont.module";
+@import "../../styles/customBtn.module";
+@import "../../styles/customInput.module";
+
+.infoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .rowInp {
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+
+    .customInpSmall {
+      @extend .customInput;
+      width: 280px;
+      height: 40px;
+    }
+  }
+
+  .inpBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .inpDate {
+    @extend .customInput;
+    width: 433px;
+    height: 40px;
+  }
+
+  .customInp:focus:hover:active {
+    @extend .customInput;
+  }
+
+  .inpAbout {
+    @extend .customInput;
+    padding: 5px 10px 5px 10px;
+    height: 100px;
+    outline: none;
+    resize: none;
+  }
+}

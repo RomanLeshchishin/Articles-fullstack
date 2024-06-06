@@ -1,5 +1,8 @@
 import styles from "../../../styles/_customInput.module.scss"
 import {inputHeight, inputWidth} from "../../../const.ts";
+import {FieldValues} from "react-hook-form";
+import {FieldPathValue} from "react-hook-form";
+import CustomTitle from "../CustomTitle/CustomTitle.tsx";
 
 interface CustomInputProps {
 	inpWidth: inputWidth;
@@ -7,8 +10,9 @@ interface CustomInputProps {
 	label?: string;
 	textPlaceholder?: string;
 	required: boolean;
-	register: any;
-	id: string;
+	inputValue:  FieldPathValue<FieldValues, any>;
+	onChangeInput: (...event: any[]) => void;
+	defaultVal?: string;
 }
 
 const CustomInput = (
@@ -18,21 +22,20 @@ const CustomInput = (
 		textPlaceholder,
 		label,
 		required,
-		register,
-		id
+		inputValue,
+		onChangeInput,
+		defaultVal
 	} : CustomInputProps) => {
 	return (
 		<div>
-			<div style={{display: "flex", flexDirection: "row", gap: "5px"}}>
-				<div className={styles.textBasic} style={{fontSize: "18px"}}>{label}</div>
-				{required ? <div style={{color: "red"}}>*</div> : <div></div>}
-			</div>
+			<CustomTitle label={label} required={required}/>
 			<input
+				defaultValue={defaultVal}
 				style={{width: inpWidth, height: inpHeight}}
 				className={styles.customInput}
 				placeholder={textPlaceholder}
-				ref={register}
-				id={id}
+				value={inputValue}
+				onChange={onChangeInput}
 			>
 			</input>
 		</div>

@@ -10,7 +10,7 @@
   border-radius: 50px;
   background: white;
   width: 900px;
-  padding: 30px 25px 30px 50px;
+  padding: 20px 30px 20px 50px;
 
   .title {
     @extend .textBlueGradient;
@@ -21,7 +21,7 @@
   .inpForm {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 60px;
 
     .infoForm {
       display: flex;
