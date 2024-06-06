@@ -50,7 +50,7 @@ export class FileService {
 			files.map( async file => {
 				const mimetype = file.mimetype
 				const currentFileType = mimetype.split('/')[1]
-				const newName = uuidv4()
+				const newName = file.originalname.split('.')[0]
 				const type = file.originalname.split('.')[1]
 
 				if(mimetype.includes('image')) {
