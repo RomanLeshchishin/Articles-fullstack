@@ -1,0 +1,15 @@
+@import "../../../styles/textFont.module";
+@import "../../../styles/customInput.module";
+
+
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.errorText {
+  @extend .textBasic;
+  color: red;
+  padding-left: 15px;
+}

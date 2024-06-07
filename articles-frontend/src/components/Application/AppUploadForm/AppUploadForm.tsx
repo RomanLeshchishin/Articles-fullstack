@@ -1,5 +1,5 @@
-import styles from "./Application.module.scss";
-import fileIcon from "../../assets/file-word-fill.png";
+import styles from "../Application.module.scss";
+import fileIcon from "../../../assets/file-word-fill.png";
 
 interface AppUploadFormProps {
 	fileName: string,

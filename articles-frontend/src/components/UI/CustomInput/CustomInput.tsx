@@ -1,8 +1,9 @@
-import styles from "../../../styles/_customInput.module.scss"
 import {inputHeight, inputWidth} from "../../../const.ts";
-import {FieldValues} from "react-hook-form";
+import {FieldError, FieldErrorsImpl, FieldValues, Merge} from "react-hook-form";
 import {FieldPathValue} from "react-hook-form";
 import CustomTitle from "../CustomTitle/CustomTitle.tsx";
+import styles from "./CustomInput.module.scss";
+import {ReactNode} from "react";
 
 interface CustomInputProps {
 	inpWidth: inputWidth;
@@ -13,6 +14,7 @@ interface CustomInputProps {
 	inputValue:  FieldPathValue<FieldValues, any>;
 	onChangeInput: (...event: any[]) => void;
 	defaultVal?: string;
+	errorMessage?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
 }
 
 const CustomInput = (
@@ -24,10 +26,11 @@ const CustomInput = (
 		required,
 		inputValue,
 		onChangeInput,
-		defaultVal
+		defaultVal,
+		errorMessage
 	} : CustomInputProps) => {
 	return (
-		<div>
+		<div className={styles.inputBlock}>
 			<CustomTitle label={label} required={required}/>
 			<input
 				defaultValue={defaultVal}
@@ -38,6 +41,7 @@ const CustomInput = (
 				onChange={onChangeInput}
 			>
 			</input>
+			<div className={styles.errorText}>{errorMessage as ReactNode}</div>
 		</div>
 	);
 };

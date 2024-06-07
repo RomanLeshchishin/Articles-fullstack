@@ -1,8 +1,8 @@
 import styles from "./Application.module.scss";
 import {useState} from "react";
 import {useForm} from "react-hook-form";
-import AppInputForm from "./AppInputForm.tsx";
-import AppUploadForm from "./AppUploadForm.tsx";
+import AppInputForm from "./AppInputForm/AppInputForm.tsx";
+import AppUploadForm from "./AppUploadForm/AppUploadForm.tsx";
 import {saveFiles} from "../../store/actions/fileActions.ts";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux.ts";
 import {createApplication} from "../../store/actions/applicationActions.ts";
@@ -13,7 +13,7 @@ const Application = () => {
 	const { files } = useAppSelector((state) => state.fileReducer)
 	const [filename, setFileName] = useState<string>('')
 	const [selectedFile, setSelectedFile] = useState(null)
-	const { handleSubmit, control } = useForm()
+	const { handleSubmit, control, formState: { errors } } = useForm()
 
 	const onChangeUploadFile = (event) => {
 		if (event.target.files.length !== 0) {
@@ -50,7 +50,7 @@ const Application = () => {
 		<div className={styles.appForm}>
 			<div className={styles.title}>Подача заявки, чтобы стать автором</div>
 			<div className={styles.inpForm}>
-				<AppInputForm control={control}/>
+				<AppInputForm control={control} errors={errors}/>
 				<AppUploadForm fileName={filename} onChangeUploadFile={onChangeUploadFile}/>
 			</div>
 			<button className={styles.btnSend} onClick={handleSubmit(onSubmit)}>Отправить</button>

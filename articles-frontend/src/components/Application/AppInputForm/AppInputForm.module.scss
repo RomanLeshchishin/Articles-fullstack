@@ -1,6 +1,6 @@
-@import "../../styles/textFont.module";
-@import "../../styles/customBtn.module";
-@import "../../styles/customInput.module";
+@import "../../../styles/textFont.module";
+@import "../../../styles/customBtn.module";
+@import "../../../styles/customInput.module";
 
 .infoForm {
   display: flex;
@@ -23,6 +23,12 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+
+    .errorText {
+      @extend .textBasic;
+      color: red;
+      padding-left: 15px;
+    }
   }
 
   .inpDate {
