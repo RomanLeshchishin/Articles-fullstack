@@ -25,7 +25,7 @@ const Login = () => {
                 <div className={styles.formInput}>
 									<div style={{display: "flex", flexDirection: "column", gap: "2px"}}>
                     <input
-												className={styles.customInput}
+												className={styles.customInputGrey}
 												placeholder={'Email'}
 												{...register("email", {
 													required: true,
@@ -39,7 +39,7 @@ const Login = () => {
 									</div>
 									<div style={{display: "flex", flexDirection: "column", gap: "2px"}}>
 										<input
-											className={styles.customInput}
+											className={styles.customInputGrey}
 											placeholder={'Пароль'}
 											{...register("password", {
 												required: true,

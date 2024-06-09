@@ -1,0 +1,125 @@
+@import "../../../styles/textFont.module";
+@import "../../../styles/customBtn.module";
+@import "../../../styles/customInput.module";
+
+.infoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .rowInp {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+
+    .customInpSmall {
+      @extend .customInputGrey;
+      width: 280px;
+      height: 40px;
+    }
+  }
+
+  .inpBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .errorText {
+      @extend .textBasic;
+      color: red;
+      padding-left: 15px;
+    }
+  }
+
+  .inpDate {
+    @extend .customInputGrey;
+    width: 433px;
+    height: 40px;
+  }
+
+  .customInp:focus:hover:active {
+    @extend .customInputGrey;
+  }
+
+  .inpAbout {
+    @extend .customInputGrey;
+    padding: 5px 10px 5px 10px;
+    height: 100px;
+    outline: none;
+    resize: none;
+  }
+
+  .addImageBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 735px;
+    height: 338px;
+    background-color: rgba(81, 161, 255, 0.41);
+    border-radius: 25px;
+
+    .addImage {
+      width: 253px;
+      height: 243px;
+    }
+  }
+
+  .inpArticle {
+    @extend .customInputBlue;
+    padding: 10px;
+    height: 175px;
+    outline: none;
+    resize: none;
+  }
+
+  .uploadForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 735px;
+    height: 338px;
+    background-color: rgba(81, 161, 255, 0.41);
+    border-radius: 25px;
+
+    .contentUpload {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: center;
+
+      .imgForm {
+        width: 253px;
+        height: 243px;
+      }
+    }
+
+    .labelUpload {
+      position: relative;
+      display: inline-block;
+    }
+
+    .labelUpload img {
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .labelUpload input[type=file] {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+    }
+
+    .labelUpload input[type=file]:disabled + img {
+      background-color: #eee;
+    }
+  }
+}
+
+

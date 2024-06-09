@@ -25,7 +25,7 @@ const Registration = () => {
                 <div className={styles.formInput}>
 									<div style={{display: "flex", flexDirection: "column", gap: "2px"}}>
                     <input
-											className={styles.customInput}
+											className={styles.customInputGrey}
 											placeholder={'Имя'}
 											{...register("name", {
 												required: true,
@@ -40,7 +40,7 @@ const Registration = () => {
 									</div>
 									<div style={{display: "flex", flexDirection: "column", gap: "2px"}}>
 										<input
-											className={styles.customInput}
+											className={styles.customInputGrey}
 											placeholder={'Email'}
 											{...register("email", {
 												required: true,
@@ -54,7 +54,7 @@ const Registration = () => {
 									</div>
 									<div style={{display: "flex", flexDirection: "column", gap: "2px"}}>
 										<input
-											className={styles.customInput}
+											className={styles.customInputGrey}
 											placeholder={'Пароль'}
 											{...register("password", {
 												required: true,

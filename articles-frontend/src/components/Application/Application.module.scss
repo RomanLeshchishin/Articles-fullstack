@@ -34,7 +34,7 @@
         gap: 18px;
 
         .customInpSmall {
-          @extend .customInput;
+          @extend .customInputGrey;
           width: 280px;
           height: 40px;
         }
@@ -47,7 +47,7 @@
       }
 
       .customInp {
-        @extend .customInput;
+        @extend .customInputGrey;
         width: 433px;
         height: 40px;
       }
@@ -62,7 +62,7 @@
         }
 
         .inpDate {
-          @extend .customInput;
+          @extend .customInputGrey;
           padding: 5px 10px 5px 10px;
           outline: none;
           resize: none;

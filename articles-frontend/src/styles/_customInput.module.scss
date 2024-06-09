@@ -1,14 +1,20 @@
 @import "./textFont.module";
 
-.customInput {
+.customInputGrey {
   background-color: #E8E8E8;
   padding-left: 10px;
   border: 0;
   border-radius: 34px;
 }
 
-.customInput::placeholder {
+.customInputGrey::placeholder {
   @extend .textLogin;
   font-family: Inter, sans-serif;
   font-size: 16px;
+}
+
+.customInputBlue {
+  @extend .customInputGrey;
+  background-color: white;
+  border: 3px solid #51A1FF;
 }

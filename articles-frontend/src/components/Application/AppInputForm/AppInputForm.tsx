@@ -1,5 +1,5 @@
-import CustomInput from "../../UI/CustomInput/CustomInput.tsx";
-import {inputHeight, inputWidth} from "../../../const.ts";
+import CustomInput, {InputTypes} from "../../UI/CustomInput/CustomInput.tsx";
+import {InputHeight, InputWidth} from "../../UI/CustomInput/CustomInput.tsx";
 import {Control, Controller, DeepRequired, FieldErrorsImpl, FieldValues} from "react-hook-form";
 import styles from "./AppInputForm.module.scss";
 import {DatePicker} from "antd";
@@ -24,8 +24,9 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 						rules={getRules("name")}
 						render={({ field }) => (
 							<CustomInput
-								inpWidth={inputWidth.sw}
-								inpHeight={inputHeight.lw}
+								type={InputTypes.APPLICATION}
+								inpWidth={InputWidth.sw}
+								inpHeight={InputHeight.lw}
 								required={true}
 								label={"Имя"}
 								inputValue={field.value}
@@ -40,8 +41,9 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 						rules={getRules("surname")}
 						render={({ field }) => (
 							<CustomInput
-								inpWidth={inputWidth.sw}
-								inpHeight={inputHeight.lw}
+								type={InputTypes.APPLICATION}
+								inpWidth={InputWidth.sw}
+								inpHeight={InputHeight.lw}
 								required={true}
 								label={"Фамилия"}
 								inputValue={field.value}
@@ -57,8 +59,9 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 				rules={getRules("nickname")}
 				render={({ field }) => (
 					<CustomInput
-						inpWidth={inputWidth.lw}
-						inpHeight={inputHeight.lw}
+						type={InputTypes.APPLICATION}
+						inpWidth={InputWidth.xlw}
+						inpHeight={InputHeight.lw}
 						required={false}
 						label={"Псевдоним"}
 						inputValue={field.value}
@@ -73,9 +76,10 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 				rules={getRules("email")}
 				render={({ field }) => (
 					<CustomInput
+						type={InputTypes.APPLICATION}
 						defaultVal={decodeToken(token).email}
-						inpWidth={inputWidth.lw}
-						inpHeight={inputHeight.lw}
+						inpWidth={InputWidth.xlw}
+						inpHeight={InputHeight.lw}
 						required={true}
 						label={"Email"}
 						inputValue={field.value}
