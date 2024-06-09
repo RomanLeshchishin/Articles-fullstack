@@ -1,0 +1,50 @@
+@import "../../styles/textFont.module";
+
+.sideBlock {
+  width: 324px;
+  height: 94.4vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #E5F1FF;
+
+  .contentBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0 20px 0;
+    text-align: center;
+  }
+}
+
+.menuLinkBlock {
+  display: inline-block;
+  text-align: center;
+}
+
+.menuLink {
+  @extend .textLogin;
+  display: inline-block;
+  border: 1px solid #E5F1FF;
+  width: 240px;
+  height: 51px;
+  text-align: center;
+  line-height: 51px;
+  text-decoration: none;
+}
+
+.menuLink:hover {
+  @extend .menuLink;
+  @extend .textLogin;
+  cursor: pointer;
+}
+
+.menuLinkActive {
+  @extend .menuLink;
+  border: 1px solid #5FB0FB;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.menuLinkActive:hover {
+  border: 1px solid #5FB0FB;
+}

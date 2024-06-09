@@ -1,8 +1,15 @@
+.mainBlock {
+  display: flex;
+  flex-direction: row;
+}
+
 .mainContent {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   align-items: center;
   height: 94.4vh;
   padding-top: 30px;
   background-color: #F5F5F5;
 }
+

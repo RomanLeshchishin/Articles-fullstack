@@ -8,6 +8,7 @@ import Application from "./components/Application/Application.tsx";
 import UserTable from "./components/AdminPanel/userTable/userTable.tsx";
 import LayoutAdmin from "./components/UI/Layout/LayoutAdmin.tsx";
 import ApplicationTable from "./components/AdminPanel/applicationTable/ApplicationTable.tsx";
+import CreateArticle from "./components/Articles/CreateArticle/CreateArticle.tsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
 				<Route element={<Layout/>}>
 					<Route path={'/'} element={<MainPage />}/>
+					<Route path={'/create-article'} element={<CreateArticle />}/>
 					<Route path={'/create-application'} element={<Application />}/>
 				</Route>
 				<Route element={<LayoutAdmin/>}>
