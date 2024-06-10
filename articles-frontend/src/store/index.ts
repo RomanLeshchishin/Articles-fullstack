@@ -3,12 +3,14 @@ import authReducer from "./slices/authSlice.ts";
 import userReducer from "./slices/userSlice.ts";
 import applicationReducer from "./slices/applicationSlice.ts";
 import fileReducer from "./slices/fileSlice.ts";
+import articleReducer from "./slices/articleSlice.ts";
 
 const rootReducer = combineReducers({
 	authReducer,
 	userReducer,
 	applicationReducer,
-	fileReducer
+	fileReducer,
+	articleReducer
 })
 
 export const setupStore = () => {

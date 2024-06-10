@@ -25,21 +25,6 @@ const fileSlice = createSlice({
 				state.files = action.payload
 				state.isLoading = false
 			}
-		);
-
-		builder.addCase(
-			saveFiles.pending,
-			(state) => {
-				state.isLoading = true
-			}
-		);
-
-		builder.addCase(
-			saveFiles.rejected,
-			(state, action) => {
-				state.error = action.payload
-				state.isLoading = false
-			}
 		)
 	}
 })

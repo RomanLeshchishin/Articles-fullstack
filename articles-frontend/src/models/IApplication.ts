@@ -8,6 +8,6 @@ export interface IApplication {
 	about: string;
 }
 
-export interface IApplicationWithId extends IApplication{
+export interface IApplicationWithFileId extends IApplication{
 	fileId: number;
 }

@@ -1,12 +1,21 @@
 import {Controller, useForm} from "react-hook-form";
 import styles from "./CreateArticle.module.scss";
-import {getRules} from "../../../utils/validation.ts";
+import {getRules, RulesType} from "../../../utils/validation.ts";
 import CustomInput, {InputHeight, InputTypes, InputWidth} from "../../UI/CustomInput/CustomInput.tsx";
 import addImageIcon from "../../../assets/addImage.svg";
 import CustomTitle from "../../UI/CustomTitle/CustomTitle.tsx";
 import {ReactNode, useState} from "react";
+import SelectTopic from "./Selectors/SelectTopic.tsx";
+import SelectTag from "./Selectors/SelectTag.tsx";
+import {saveFiles} from "../../../store/actions/fileActions.ts";
+import {useAppDispatch, useAppSelector} from "../../../hooks/redux.ts";
+import {decodeToken} from "../../../utils/decodeToken.ts";
+import {createArticle} from "../../../store/actions/articleActions.ts";
+import {IArticle} from "../../../models/IArticle.ts";
 
 const CreateArticle = () => {
+	const dispatch = useAppDispatch()
+	const { files } = useAppSelector((state) => state.fileReducer)
 	const { handleSubmit, control, formState: { errors } } = useForm()
 	const [filename, setFileName] = useState<string>('')
 	const [selectedFile, setSelectedFile] = useState(null)
@@ -18,11 +27,41 @@ const CreateArticle = () => {
 		}
 	}
 
+	const sendForm = async () => {
+		if (!selectedFile) {
+			alert('Выберите файл')
+			return
+		}
+		const formFileData = new FormData()
+		formFileData.append('file', selectedFile)
+		dispatch(saveFiles(formFileData))
+	}
+
+	const onSubmit = async (data) => {
+		await sendForm()
+		const token = localStorage.getItem('token')
+		if (token) {
+			const file = files[0]
+			const articleData: IArticle = {
+				userId: decodeToken(token).id,
+				title: data.title,
+				nickname: data.nickname,
+				topic: data.topic.value,
+				tags: data.tags.map((tag) => tag.value),
+				text: data.text,
+				fileIds: [file.id],
+				checked: true
+			}
+			console.log(articleData)
+			dispatch(createArticle(articleData))
+		}
+	}
+
 	return (
 		<div className={styles.infoForm}>
 				<Controller
 					control={control}
-					rules={getRules("name")}
+					rules={getRules(RulesType.Required)}
 					render={({ field }) => (
 						<CustomInput
 							type={InputTypes.ARTICLE}
@@ -32,50 +71,39 @@ const CreateArticle = () => {
 							label={"Название статьи"}
 							inputValue={field.value}
 							onChangeInput={field.onChange}
-							errorMessage={errors.name?.message}
+							errorMessage={errors.title?.message}
 						/>
 					)}
-					name={"name"}
+					name={"title"}
 				/>
 			<div className={styles.rowInp}>
-				<Controller
-					control={control}
-					rules={getRules("surname")}
-					render={({ field }) => (
-						<CustomInput
-							type={InputTypes.ARTICLE}
-							inpWidth={InputWidth.lw}
-							inpHeight={InputHeight.xlw}
-							required={true}
-							label={"Тематика"}
-							inputValue={field.value}
-							onChangeInput={field.onChange}
-							errorMessage={errors.surname?.message}
-						/>
-					)}
-					name={"surname"}
-				/>
-			<Controller
-				control={control}
-				rules={getRules("nickname")}
-				render={({ field }) => (
-					<CustomInput
-						type={InputTypes.ARTICLE}
-						inpWidth={InputWidth.lw}
-						inpHeight={InputHeight.xlw}
-						required={false}
-						label={"Теги"}
-						inputValue={field.value}
-						onChangeInput={field.onChange}
-						errorMessage={errors.nickname?.message}
+				<div className={styles.inpBlock}>
+					<CustomTitle required={true} label={"Тематика"}/>
+					<Controller
+						control={control}
+						rules={getRules(RulesType.Required)}
+						render={({ field }) => (
+							<SelectTopic valueTopic={field.value} onChangeTopic={field.onChange}/>
+						)}
+						name={"topic"}
 					/>
-				)}
-				name={"nickname"}
-			/>
+					<div className={styles.errorText}>{errors.topic?.message as ReactNode}</div>
+				</div>
+				<div className={styles.inpBlock}>
+					<CustomTitle required={false} label={"Теги"}/>
+					<Controller
+						control={control}
+						rules={getRules()}
+						render={({ field }) => (
+							<SelectTag valueTags={field.value} onChangeTags={field.onChange}/>
+						)}
+						name={"tags"}
+					/>
+				</div>
 			</div>
 			<Controller
 				control={control}
-				rules={getRules("email")}
+				rules={getRules(RulesType.MaxLength, 20)}
 				render={({ field }) => (
 					<CustomInput
 						type={InputTypes.ARTICLE}
@@ -86,10 +114,10 @@ const CreateArticle = () => {
 						label={"Псевдоним"}
 						inputValue={field.value}
 						onChangeInput={field.onChange}
-						errorMessage={errors.email?.message}
+						errorMessage={errors.nickname?.message}
 					/>
 				)}
-				name={"email"}
+				name={"nickname"}
 			/>
 			<div className={styles.uploadForm}>
 				<label className={styles.labelUpload}>
@@ -108,14 +136,15 @@ const CreateArticle = () => {
 				<CustomTitle required={true} label={"Текст статьи"}/>
 				<Controller
 					control={control}
-					rules={getRules("about")}
+					rules={getRules(RulesType.MinLength, 10)}
 					render={({ field }) => (
 						<textarea className={styles.inpArticle} value={field.value} onChange={field.onChange}/>
 					)}
-					name={"about"}
+					name={"text"}
 				/>
-				<div className={styles.errorText}>{errors.about?.message as ReactNode}</div>
+				<div className={styles.errorText}>{errors.text?.message as ReactNode}</div>
 			</div>
+			<button className={styles.submitBtn} onClick={handleSubmit(onSubmit)}>Отправить</button>
 		</div>
 	);
 };

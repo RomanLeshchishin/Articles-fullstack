@@ -1,33 +1,53 @@
 import {FieldValues, RegisterOptions} from "react-hook-form";
 
-export const getRules = (fieldName: string) :
+export enum RulesType {
+	Required = 'required',
+	MaxLength = 'maxLength',
+	MinLength = 'minLength',
+	MinAndMaxLength = 'minAndMaxLength',
+	EmailPattern = 'emailPattern',
+	Default = ''
+}
+
+export const getRules = (rulesType: RulesType = RulesType.Default, countSymbolsMin: number = 0, countSymbolsMax: number = 0) :
 	Omit<RegisterOptions<FieldValues, "name">, "disabled" | "valueAsNumber" | "valueAsDate" | "setValueAs"> | undefined => {
-	if (fieldName === "name" || fieldName === "surname" || fieldName === "date") {
-		return {required: {value: true, message: 'обязательное поле'}}
-	}
-	else {
-		switch (fieldName) {
-			case "nickname":
-				return {required: false, maxLength: {value: 20, message: 'Никнейм должен быть не больше 20 символов'}}
-			case "email":
-				return {
-					required: {value: true, message: 'обязательное поле'},
-					pattern: {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: "Неправильный email адрес"}
+	switch (rulesType) {
+		case RulesType.Required:
+			return {required: {value: true, message: 'обязательное поле'}}
+		case RulesType.MaxLength:
+			return {
+				required: false,
+				maxLength: {
+					value: countSymbolsMin,
+					message: `Никнейм должен быть не больше ${countSymbolsMin} символов`
 				}
-			case "about":
-				return {
-					required: false,
-					minLength: {
-						value: 20,
-						message: 'Описание должно быть больше 20 символов'
-					},
-					maxLength: {
-						value: 200,
-						message: 'Описание не должно превышать 200 символов'
-					}
+			}
+		case RulesType.MinLength:
+			return {
+				required: true,
+				minLength: {
+					value: countSymbolsMin,
+					message: `Описание должно быть больше ${countSymbolsMin} символов`
 				}
-			default:
-				return {required: false}
-		}
+			}
+		case RulesType.MinAndMaxLength:
+			return {
+				required: false,
+				minLength: {
+					value: countSymbolsMin,
+					message: `Описание должно быть больше ${countSymbolsMin} символов`
+				},
+				maxLength: {
+					value: countSymbolsMax,
+					message: `Описание не должно превышать ${countSymbolsMax} символов`
+				}
+			}
+		case RulesType.EmailPattern:
+			return {
+				required: {value: true, message: 'обязательное поле'},
+				pattern: {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: "Неправильный email адрес"}
+			}
+		default:
+			return {required: false}
 	}
 }

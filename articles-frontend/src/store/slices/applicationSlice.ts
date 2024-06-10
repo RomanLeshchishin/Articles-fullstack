@@ -1,10 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {createApplication, getApplications} from "../actions/applicationActions.ts";
-import {IApplicationWithId} from "../../models/IApplication.ts";
+import {IApplicationWithFileId} from "../../models/IApplication.ts";
 
 interface ApplicationState {
 	isLoading: boolean,
-	applications: IApplicationWithId[],
+	applications: IApplicationWithFileId[],
 	status: number,
 	error: string | unknown
 }
@@ -23,7 +23,7 @@ const applicationSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(
 			getApplications.fulfilled,
-			(state, action: PayloadAction<IApplicationWithId[]>) => {
+			(state, action: PayloadAction<IApplicationWithFileId[]>) => {
 				state.isLoading = false;
 				state.error = '';
 				state.applications = action.payload;

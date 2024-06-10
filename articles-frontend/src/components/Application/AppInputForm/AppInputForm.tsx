@@ -1,11 +1,10 @@
-import CustomInput, {InputTypes} from "../../UI/CustomInput/CustomInput.tsx";
-import {InputHeight, InputWidth} from "../../UI/CustomInput/CustomInput.tsx";
+import CustomInput, {InputHeight, InputTypes, InputWidth} from "../../UI/CustomInput/CustomInput.tsx";
 import {Control, Controller, DeepRequired, FieldErrorsImpl, FieldValues} from "react-hook-form";
 import styles from "./AppInputForm.module.scss";
 import {DatePicker} from "antd";
 import CustomTitle from "../../UI/CustomTitle/CustomTitle.tsx";
 import {decodeToken} from "../../../utils/decodeToken.ts";
-import {getRules} from "../../../utils/validation.ts";
+import {getRules, RulesType} from "../../../utils/validation.ts";
 import {ReactNode} from "react";
 
 interface AppInputFormProps {
@@ -21,7 +20,7 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 			<div className={styles.rowInp}>
 					<Controller
 						control={control}
-						rules={getRules("name")}
+						rules={getRules(RulesType.Required)}
 						render={({ field }) => (
 							<CustomInput
 								type={InputTypes.APPLICATION}
@@ -38,7 +37,7 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 					/>
 					<Controller
 						control={control}
-						rules={getRules("surname")}
+						rules={getRules(RulesType.Required)}
 						render={({ field }) => (
 							<CustomInput
 								type={InputTypes.APPLICATION}
@@ -56,7 +55,7 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 			</div>
 			<Controller
 				control={control}
-				rules={getRules("nickname")}
+				rules={getRules(RulesType.MaxLength, 20)}
 				render={({ field }) => (
 					<CustomInput
 						type={InputTypes.APPLICATION}
@@ -73,7 +72,7 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 			/>
 			<Controller
 				control={control}
-				rules={getRules("email")}
+				rules={getRules(RulesType.EmailPattern)}
 				render={({ field }) => (
 					<CustomInput
 						type={InputTypes.APPLICATION}
@@ -93,7 +92,7 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 				<CustomTitle required={true} label={"Дата рождения"}/>
 				<Controller
 					control={control}
-					rules={getRules("date")}
+					rules={getRules(RulesType.Required)}
 					render={({ field }) => (
 						<DatePicker value={field.value} onChange={field.onChange} className={styles.inpDate} placeholder={''}/>
 					)}
@@ -105,7 +104,7 @@ const AppInputForm = ({ control, errors } : AppInputFormProps) => {
 				<CustomTitle required={false} label={"О себе"}/>
 				<Controller
 					control={control}
-					rules={getRules("about")}
+					rules={getRules(RulesType.MinAndMaxLength, 20, 200)}
 					render={({ field }) => (
 						<textarea className={styles.inpAbout} value={field.value} onChange={field.onChange}/>
 					)}

@@ -1,12 +1,18 @@
-.customGradientButton {
+.customButton {
   @extend .textLogin;
   font-weight: 500;
-  background: linear-gradient(to right, #5FB0FB, #5200FF);
+  background: #399DFA;
   border: 0;
-  border-radius: 34px;
+  border-radius: 15px;
   justify-content: center;
   text-align: center;
   color: white;
+}
+
+.customGradientButton {
+  @extend .customButton;
+  background: linear-gradient(to right, #5FB0FB, #5200FF);
+  border-radius: 34px;
 }
 
 .customGradientButton:active {

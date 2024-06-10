@@ -128,12 +128,9 @@
 
 
       .btnUpload {
-        @extend .customGradientButton;
-        background: #399DFA;
+        @extend .customButton;
         width: 172px;
-        border-radius: 15px;
         padding: 10px 0 10px 0;
-        color: white;
       }
 
       .btnUpload:active {
