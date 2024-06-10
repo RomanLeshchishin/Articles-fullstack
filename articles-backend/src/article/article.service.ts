@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {HttpStatus, Injectable} from '@nestjs/common';
 import {InjectModel} from "@nestjs/sequelize";
 import {Article} from "./article.model";
 import {CreateArticleDto} from "./dto/create-article.dto";
@@ -11,7 +11,7 @@ export class ArticleService {
 
 	async createArticle(dto: CreateArticleDto){
 		const article = await this.articleRepository.create(dto)
-		return article;
+		return HttpStatus.OK;
 	}
 
 	async getArticleById(id: number){
