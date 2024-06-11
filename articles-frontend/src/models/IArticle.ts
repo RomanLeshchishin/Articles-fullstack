@@ -8,3 +8,7 @@ export interface IArticle {
 	fileIds: number[];
 	checked: boolean;
 }
+
+export interface IArticleWithId extends IArticle{
+	id: number;
+}

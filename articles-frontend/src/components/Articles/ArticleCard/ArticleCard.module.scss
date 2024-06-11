@@ -3,41 +3,51 @@
 .card {
   display: flex;
   flex-direction: row;
-  width: 648px;
+  width: 1068px;
 
   .img {
-    width: 240px;
+    width: 280px;
     height: 227px;
     border-radius: 8px 0 0 8px;
   }
 
-  .upperBlock {
+  .contentBlock {
     display: flex;
     flex-direction: column;
-    width: 408px;
+    width: 808px;
     padding: 15px;
-    gap: 15px;
+    gap: 23px;
     background: white;
     border-radius: 0 8px 8px 0;
 
-    .titleTech {
-      @extend .textBasic;
-      color: #0B7BFF;
-    }
-
-    .mainInfo {
+    .upperBlock {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
 
-      .title {
-        @extend .textTitle;
-        width: 368px;
+      .titleTech {
+        @extend .textBasic;
+        color: #0B7BFF;
       }
 
-      .description {
-        @extend .textBasic;
-        width: 368px;
+      .mainInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .cardLink {
+          text-decoration: none;
+
+          .title {
+            @extend .textTitle;
+            width: 780px;
+          }
+        }
+
+        .description {
+          @extend .textBasic;
+          width: 780px;
+        }
       }
     }
 
@@ -48,7 +58,7 @@
       .additionalInfo {
         display: flex;
         flex-direction: row;
-        gap: 217px;
+        gap: 617px;
 
         .blockViews {
           display: flex;
