@@ -32,7 +32,7 @@ export class Article extends Model<Article, ArticleCreationAttr> {
 	@Column({type: DataType.CHAR(300), allowNull: false})
 	title: string;
 
-	@Column({type: DataType.STRING, allowNull: false})
+	@Column({type: DataType.CHAR(1000000), allowNull: false})
 	text: string;
 
 	@Column({type: DataType.ARRAY(DataType.INTEGER), allowNull: false})

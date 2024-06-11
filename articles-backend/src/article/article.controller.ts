@@ -13,21 +13,31 @@ export class ArticleController {
 
 	@Get()
 	getAll() {
-		return this.articleService.getAllArticles()
+		return this.articleService.getAllArticles();
+	}
+
+	@Get('/checked/:status')
+	getByCheckedStatus(@Param('status') status: string) {
+		if (status === 'checked') {
+			return this.articleService.getCheckedArticles(true);
+		}
+		else {
+			return this.articleService.getCheckedArticles(false);
+		}
 	}
 
 	@Get('/:id')
 	getById(@Param('id') id: number) {
-		return this.articleService.getArticleById(id)
+		return this.articleService.getArticleById(id);
 	}
 
 	@Get('/user/:userId')
 	getByUserId(@Param('userId') userId: number) {
-		return this.articleService.getArticlesByUserId(userId)
+		return this.articleService.getArticlesByUserId(userId);
 	}
 
 	@Delete('/:id')
 	deleteById(@Param('id') id: number) {
-		return this.articleService.deleteArticleById(id)
+		return this.articleService.deleteArticleById(id);
 	}
 }

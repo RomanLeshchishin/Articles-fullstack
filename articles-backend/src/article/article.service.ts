@@ -10,7 +10,7 @@ export class ArticleService {
 	) {}
 
 	async createArticle(dto: CreateArticleDto){
-		const article = await this.articleRepository.create(dto)
+		await this.articleRepository.create(dto)
 		return HttpStatus.OK;
 	}
 
@@ -21,6 +21,11 @@ export class ArticleService {
 
 	async getArticlesByUserId(userId: number) {
 		const articles = await this.articleRepository.findAll({where: {userId}})
+		return articles;
+	}
+
+	async getCheckedArticles(checked: boolean) {
+		const articles = await this.articleRepository.findAll({where: {checked}})
 		return articles;
 	}
 
