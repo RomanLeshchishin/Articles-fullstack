@@ -27,3 +27,16 @@ export const getCheckedArticles = createAsyncThunk(
 		}
 	}
 )
+
+export const getArticlesById = createAsyncThunk(
+	'article/getArticlesById',
+	async (userId: number, thunkApi) => {
+		try {
+			const response = await axios.get<IArticleWithId[]>(`http://localhost:5000/article/user/${userId}`)
+			return response.data
+		}
+		catch (e) {
+			return thunkApi.rejectWithValue(e)
+		}
+	}
+)

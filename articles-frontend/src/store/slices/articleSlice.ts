@@ -1,11 +1,12 @@
 import {IArticleWithId} from "../../models/IArticle.ts";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {createArticle, getCheckedArticles} from "../actions/articleActions.ts";
+import {createArticle, getArticlesById, getCheckedArticles} from "../actions/articleActions.ts";
 
 interface ArticleState {
 	isLoading: boolean,
 	currentArticle: IArticleWithId | undefined,
 	articles: IArticleWithId[],
+	myArticles: IArticleWithId[],
 	status: number,
 	error: string | unknown
 }
@@ -14,6 +15,7 @@ const initialState : ArticleState = {
 	isLoading: false,
 	currentArticle: {} as IArticleWithId,
 	articles: [],
+	myArticles: [],
 	status: 0,
 	error: ''
 }
@@ -24,6 +26,7 @@ const articleSlice = createSlice({
 	reducers: {
 		getCurrentArticle: (state, action: PayloadAction<number>) => {
 			state.currentArticle = state.articles.find((article) => article.id === action.payload)
+				|| state.myArticles.find((article) => article.id === action.payload)
 		}
 	},
 	extraReducers: (builder) => {
@@ -52,6 +55,30 @@ const articleSlice = createSlice({
 
 		builder.addCase(
 			getCheckedArticles.rejected,
+			(state, action) => {
+				state.isLoading = false;
+				state.error = action.payload;
+			}
+		);
+
+		builder.addCase(
+			getArticlesById.fulfilled,
+			(state, action: PayloadAction<IArticleWithId[]>) => {
+				state.isLoading = false;
+				state.error = '';
+				state.myArticles = action.payload;
+			}
+		);
+
+		builder.addCase(
+			getArticlesById.pending,
+			(state) => {
+				state.isLoading = true;
+			}
+		);
+
+		builder.addCase(
+			getArticlesById.rejected,
 			(state, action) => {
 				state.isLoading = false;
 				state.error = action.payload;

@@ -37,8 +37,8 @@ const CreateArticle = () => {
 		dispatch(saveFiles(formFileData))
 	}
 
-	const onSubmit = async (data) => {
-		await sendForm()
+	const onSubmit = (data) => {
+		sendForm()
 		const token = localStorage.getItem('token')
 		if (token) {
 			const file = files[0]
