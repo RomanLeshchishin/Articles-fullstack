@@ -1,33 +1,30 @@
-import styles from "./SideMenu.module.scss";
 import {useState} from "react";
-import {MenuLink} from "./MenuLink";
+import styles from "./SideMenu.module.scss";
+import {MenuLinkType} from "./SideMenu.tsx";
+import MenuLink from "./MenuLink.tsx";
 
-export type MenuLinkType = {
-	link: string;
-	text: string;
-	border: boolean;
-}
-
-const links: MenuLinkType[] = [
+export const authorLinks: MenuLinkType[] = [
 	{link: '/', text: 'Все', border: false},
 	{link: '/', text: 'Разработка', border: false},
 	{link: '/', text: 'Дизайн', border: false},
 	{link: '/', text: 'Маркетинг', border: false},
 	{link: '/', text: 'Менеджмент', border: false},
-	{link: '/', text: 'Научпоп', border: false}
+	{link: '/', text: 'Научпоп', border: false},
+	{link: '/create-article', text: 'Создать статью', border: true},
+	{link: '/my-articles', text: 'Мои статьи', border: false}
 ]
 
-const SideMenu = () => {
+const SideMenuAuthor = () => {
 	const [activeFilterList, setActiveFilterList] = useState<boolean[]>([])
 	return (
 		<div className={styles.sideBlock}>
 			<div className={styles.contentBlock}>
-				{links.map((link, count) =>
+				{authorLinks.map((link, count) =>
 					<MenuLink
 						key={count}
 						indexLink={count}
 						link={link}
-						links={links}
+						links={authorLinks}
 						active={activeFilterList[count]}
 						setActiveList={setActiveFilterList}
 					/>
@@ -37,4 +34,4 @@ const SideMenu = () => {
 	);
 };
 
-export default SideMenu;
+export default SideMenuAuthor;

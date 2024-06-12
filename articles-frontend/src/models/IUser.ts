@@ -1,7 +1,8 @@
 export enum Role {
 	USER = "USER",
 	AUTHOR = "AUTHOR",
-	ADMIN = "ADMIN"
+	ADMIN = "ADMIN",
+	NOAUTH = "NOAUTH"
 }
 
 export interface IRoleDescription {

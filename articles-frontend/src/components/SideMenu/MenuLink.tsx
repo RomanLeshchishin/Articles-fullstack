@@ -1,16 +1,17 @@
 import styles from "./SideMenu.module.scss";
 import {Link} from "react-router-dom";
-import {links, MenuLinkType} from "./SideMenu.tsx";
+import {MenuLinkType} from "./SideMenu.tsx";
 import {Dispatch, SetStateAction} from "react";
 
 interface MenuLinkProps {
 	indexLink: number,
   link: MenuLinkType,
+	links: MenuLinkType[],
 	active: boolean,
 	setActiveList: Dispatch<SetStateAction<boolean[]>>,
 }
 
-export const MenuLink = ({ indexLink, link, active, setActiveList } : MenuLinkProps) => {
+export const MenuLink = ({ indexLink, link, links, active, setActiveList } : MenuLinkProps) => {
 	const selectOption = (index : number) => {
 		const initialActiveList = new Array<boolean>(links.length).fill(false)
 		const newActiveList = [
