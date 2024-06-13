@@ -6,18 +6,22 @@ interface ArticleState {
 	isLoading: boolean,
 	currentArticle: IArticleWithId | undefined,
 	articles: IArticleWithId[],
+	filterArticles: IArticleWithId[],
 	myArticles: IArticleWithId[],
 	status: number,
-	error: string | unknown
+	error: string | unknown,
+	filterOption: string
 }
 
 const initialState : ArticleState = {
 	isLoading: false,
 	currentArticle: {} as IArticleWithId,
 	articles: [],
+	filterArticles: [],
 	myArticles: [],
 	status: 0,
-	error: ''
+	error: '',
+	filterOption: 'Все'
 }
 
 const articleSlice = createSlice({
@@ -27,6 +31,11 @@ const articleSlice = createSlice({
 		getCurrentArticle: (state, action: PayloadAction<number>) => {
 			state.currentArticle = state.articles.find((article) => article.id === action.payload)
 				|| state.myArticles.find((article) => article.id === action.payload)
+		},
+
+		filterArticles: (state, action: PayloadAction<string>) => {
+			state.filterArticles = state.articles.filter((article) => article.topic === action.payload)
+			state.filterOption = action.payload
 		}
 	},
 	extraReducers: (builder) => {
@@ -87,6 +96,6 @@ const articleSlice = createSlice({
 	}
 })
 
-export const { getCurrentArticle } = articleSlice.actions
+export const { getCurrentArticle, filterArticles } = articleSlice.actions
 
 export default articleSlice.reducer

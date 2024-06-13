@@ -8,16 +8,11 @@ export type MenuLinkType = {
 	border: boolean;
 }
 
-const links: MenuLinkType[] = [
-	{link: '/', text: 'Все', border: false},
-	{link: '/', text: 'Разработка', border: false},
-	{link: '/', text: 'Дизайн', border: false},
-	{link: '/', text: 'Маркетинг', border: false},
-	{link: '/', text: 'Менеджмент', border: false},
-	{link: '/', text: 'Научпоп', border: false}
-]
+interface SideMenuProps {
+	links: MenuLinkType[]
+}
 
-const SideMenu = () => {
+const SideMenu = ({ links } : SideMenuProps) => {
 	const [activeFilterList, setActiveFilterList] = useState<boolean[]>([])
 	return (
 		<div className={styles.sideBlock}>

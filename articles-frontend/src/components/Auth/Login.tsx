@@ -1,9 +1,11 @@
 import styles from "./AuthComponents.module.scss";
 import { useNavigate } from "react-router-dom";
 import {AuthData} from "../../models/AuthResponse.ts";
-import {useAppDispatch} from "../../hooks/redux.ts";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux.ts";
 import {loginUser} from "../../store/actions/authActions.ts";
 import {useForm} from "react-hook-form";
+import {Role} from "../../models/IUser.ts";
+import {useEffect} from "react";
 
 const Login = () => {
 	const navigate = useNavigate()
@@ -12,11 +14,21 @@ const Login = () => {
 		handleSubmit,
 		formState: { errors }
 	} = useForm<{email: string, password: string}>();
+	const { user, roles } = useAppSelector((state) => state.authReducer)
 	const dispatch = useAppDispatch()
 	const login = async (inputData: AuthData) => {
 		await dispatch(loginUser(inputData))
-		navigate('/')
 	}
+
+	useEffect(() => {
+		if (roles.map((role) => role.value).includes(Role.ADMIN)) {
+			navigate('/admin-user-table')
+		}
+		else if (roles.map((role) => role.value).includes(Role.USER)
+			|| roles.map((role) => role.value).includes(Role.AUTHOR)) {
+			navigate('/')
+		}
+	}, [user])
 
     return (
         <div className={styles.authorization}>
@@ -28,11 +40,7 @@ const Login = () => {
 												className={styles.customInputGrey}
 												placeholder={'Email'}
 												{...register("email", {
-													required: true,
-													pattern: {
-														value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-														message: "Неправильный email адрес"
-													}
+													required: true
 												})}
 										/>
 										<div style={{fontSize: "12px", color: "red"}}>{errors.email?.message}</div>
@@ -42,11 +50,7 @@ const Login = () => {
 											className={styles.customInputGrey}
 											placeholder={'Пароль'}
 											{...register("password", {
-												required: true,
-												minLength: {
-													value: 5,
-													message: 'Пароль должно быть больше 4 символов'
-												}
+												required: true
 											})}
 										/>
 										<div style={{fontSize: "12px", color: "red"}}>{errors.password?.message}</div>

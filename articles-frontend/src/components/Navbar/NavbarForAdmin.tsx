@@ -6,6 +6,7 @@ const NavbarForAdmin = () => {
 	const navigate = useNavigate()
 	const logOut = () => {
 		localStorage.clear()
+		window.location.reload();
 		navigate('/')
 	}
 

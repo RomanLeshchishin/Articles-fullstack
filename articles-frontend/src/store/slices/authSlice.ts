@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IUser} from "../../models/IUser.ts";
+import {IRoleDescription, IUser, Role} from "../../models/IUser.ts";
 import {loginUser, registerUser} from "../actions/authActions.ts";
 import {AuthResponse} from "../../models/AuthResponse.ts";
 import {decodeToken} from "../../utils/decodeToken.ts";
@@ -7,12 +7,14 @@ import {decodeToken} from "../../utils/decodeToken.ts";
 interface AuthUserState {
 	isLoading: boolean,
 	user: IUser,
+	roles: IRoleDescription[],
 	error: string | unknown
 }
 
 const initialState : AuthUserState = {
     isLoading: false,
     user: {} as IUser,
+		roles: [{value: Role.NOAUTH, description: 'не авторизован'}],
     error: ''
 }
 
@@ -51,11 +53,12 @@ const authSlice = createSlice({
 		builder.addCase(
 			loginUser.fulfilled,
 			(state, action: PayloadAction<AuthResponse>) => {
-				state.isLoading = false;
-				state.error = '';
 				localStorage.setItem('token', action.payload.token)
 				localStorage.setItem('name', action.payload.name)
 				state.user = decodeToken(action.payload.token)
+				state.roles = decodeToken(action.payload.token).roles
+				state.isLoading = false;
+				state.error = '';
 			}
 		);
 

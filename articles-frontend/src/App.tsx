@@ -11,6 +11,7 @@ import CurrentArticle from "./components/Articles/CurrentArticle/CurrentArticle.
 import {Role} from "./models/IUser.ts";
 import CreateArticle from "./components/Articles/CreateArticle/CreateArticle.tsx";
 import MyArticlesPage from "./pages/MyArticlesPage/MyArticlesPage.tsx";
+import LayoutForAdmin from "./components/UI/Layout/LayoutForAdmin.tsx";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
 					<Route path={'/create-article'} element={<CreateArticle />}/>
 					<Route path={'/my-articles'} element={<MyArticlesPage />}/>
 				</Route>
-				<Route element={<Layout roles={[Role.ADMIN]}/>}>
+				<Route element={<LayoutForAdmin/>}>
 					<Route path={'/admin-application-table'} element={<ApplicationTable />}/>
 					<Route path={'/admin-user-table'} element={<UserTable />}/>
 				</Route>
