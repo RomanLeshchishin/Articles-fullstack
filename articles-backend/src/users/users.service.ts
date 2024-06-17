@@ -4,13 +4,17 @@ import {User} from "./users.model";
 import {CreateUserDto} from "./dto/create-user.dto";
 import {RolesService} from "../roles/roles.service";
 import {Role} from "../roles/roles.model";
+import {UserInf} from "../users-inf/users-inf.model";
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectModel(User) private userRepository: typeof User, private roleService: RolesService) {}
+    constructor(@InjectModel(User) private userRepository: typeof User,
+								@InjectModel(UserInf) private userInfRepository: typeof UserInf,
+								private roleService: RolesService) {}
 
     async createUser(dto: CreateUserDto) {
         const user = await this.userRepository.create(dto)
+				await this.userInfRepository.create({userId: user.id})
         const role = await this.roleService.getRoleByValue("USER")
         await user.$set('roles', [role.id])
         user.roles = [role]

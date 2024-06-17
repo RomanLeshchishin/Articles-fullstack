@@ -13,6 +13,8 @@ import { ArticleModule } from './article/article.module';
 import {UploadFile} from "./file/file.model";
 import {Application} from "./application/application.model";
 import {Article} from "./article/article.model";
+import { UsersInfModule } from './users-inf/users-inf.module';
+import {UserInf} from "./users-inf/users-inf.model";
 
 @Module({
     controllers: [],
@@ -28,7 +30,7 @@ import {Article} from "./article/article.model";
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Role, UserRoles, UploadFile, Application, Article],
+            models: [User, Role, UserRoles, UploadFile, Application, Article, UserInf],
             autoLoadModels: true
     }),
         UsersModule,
@@ -37,6 +39,7 @@ import {Article} from "./article/article.model";
         FileModule,
         ApplicationModule,
         ArticleModule,
+        UsersInfModule,
     ]
 })
 export class AppModule {

@@ -7,11 +7,13 @@ import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-roles.model";
 import {RolesModule} from "../roles/roles.module";
 import {JwtStrategy} from "../auth/jwt.strategy";
+import {UsersInfModule} from "../users-inf/users-inf.module";
+import {UserInf} from "../users-inf/users-inf.model";
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService, JwtStrategy],
-  imports: [SequelizeModule.forFeature([User, Role, UserRoles]), RolesModule],
+  imports: [SequelizeModule.forFeature([User, Role, UserRoles, UserInf]), RolesModule, UsersInfModule],
   exports: [UsersService]
 })
 export class UsersModule {}
