@@ -1,6 +1,7 @@
 import styles from "./Navbar.module.scss";
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../assets/logo.svg";
+import profile from "../../assets/account-avatar-person.svg";
 import {decodeToken} from "../../utils/decodeToken.ts";
 import {Role} from "../../models/IUser.ts";
 
@@ -32,7 +33,12 @@ const Navbar = () => {
 		{localStorage.getItem('name') !== null
 			?
 			<div className={styles.navLinkBlock}>
-				<div>{localStorage.getItem('name')}</div>
+				<div className={styles.profileBlock}>
+					<div>{localStorage.getItem('name')}</div>
+					<Link to={'/user-info'}>
+						<img src={profile} alt={'profile'} className={styles.profileIcon}/>
+					</Link>
+				</div>
 				<div onClick={logOut} className={styles.navLink}>Выйти</div>
 			</div>
 			:

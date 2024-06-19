@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@gravity-ui/icons": "^2.10.0",
+    "@gravity-ui/uikit": "^6.18.0",
     "@reduxjs/toolkit": "^2.2.2",
     "antd": "^5.17.4",
     "axios": "^1.6.8",
     "bootstrap": "^5.0.0",
     "bootstrap-icons": "^1.11.3",
+    "classnames": "^2.5.1",
     "jwt-decode": "^4.0.0",
     "path": "^0.12.7",
     "path-types": "^1.0.4",

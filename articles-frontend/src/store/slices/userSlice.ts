@@ -1,11 +1,13 @@
 import {IUser} from "../../models/IUser.ts";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {addUserRole, delUserRole, getUserByEmail, getUsers} from "../actions/userActions.ts";
+import {addUserRole, delUserRole, editUserInfo, getUserByEmail, getUserInfo, getUsers} from "../actions/userActions.ts";
+import {IUserInfo} from "../../models/IUserInfo.ts";
 
 interface UserState {
 	isLoading: boolean,
 	users: IUser[],
 	currentUser: IUser,
+	currentUserInfo: IUserInfo,
 	error: string | unknown,
 	id: string
 }
@@ -14,6 +16,7 @@ const initialState : UserState = {
 	isLoading: false,
 	users: [],
 	currentUser: {} as IUser,
+	currentUserInfo: {} as IUserInfo,
 	error: '',
 	id: ''
 }
@@ -67,6 +70,20 @@ const userSlice = createSlice({
 				state.id = action.payload
 			}
 		)
+
+		builder.addCase(
+			getUserInfo.fulfilled,
+			(state, action) => {
+				state.currentUserInfo = action.payload
+			}
+		);
+
+		builder.addCase(
+			editUserInfo.fulfilled,
+			(state, action) => {
+				state.currentUserInfo = action.payload
+			}
+		);
 	}
 })
 

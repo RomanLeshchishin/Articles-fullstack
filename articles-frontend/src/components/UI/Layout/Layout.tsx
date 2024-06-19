@@ -6,6 +6,7 @@ import {Role} from "../../../models/IUser.ts";
 import {decodeToken} from "../../../utils/decodeToken.ts";
 import Registration from "../../Auth/Registration.tsx";
 import {authorLinks, baseLinks} from "../../../../const/sideMenu.ts";
+import NavbarForAdmin from "../../Navbar/NavbarForAdmin.tsx";
 
 interface LayoutProps {
 	roles: Role[]
@@ -21,11 +22,15 @@ const Layout = ({ roles } : LayoutProps) => {
 		<div>
 			{count.length !== index.length
 				? <div>
-					<Navbar/>
+					{userRoles.map((role) => role.value).includes(Role.ADMIN) ? <NavbarForAdmin/> : <Navbar/>}
 					<div className={styles.mainBlock}>
-						{userRoles.map((role) => role.value).includes(Role.AUTHOR)
-							? <SideMenu links={[...baseLinks, ...authorLinks]}/>
-							: <SideMenu links={baseLinks}/>}
+						{userRoles.map((role) => role.value).includes(Role.ADMIN)
+							?
+							<div></div>
+							:
+							userRoles.map((role) => role.value).includes(Role.AUTHOR)
+								? <SideMenu links={[...baseLinks, ...authorLinks]}/>
+								: <SideMenu links={baseLinks}/>}
 						<div className={styles.mainContent}>
 							<Outlet/>
 						</div>

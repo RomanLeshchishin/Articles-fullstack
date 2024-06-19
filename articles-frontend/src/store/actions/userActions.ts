@@ -1,6 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {IUser} from "../../models/IUser.ts";
+import {IUserInfo} from "../../models/IUserInfo.ts";
 
 export const getUsers = createAsyncThunk(
 	'users/getUsers',
@@ -51,13 +52,47 @@ export const delUserRole = createAsyncThunk(
 		try {
 			const response = await axios.put('http://localhost:5000/users/del', {id: id}, {
 				headers: {
-					'Authorization': `Bearer ${localStorage.getItem('token')}`,
+					'Authorization': `Bearer ${localStorage.getItem('token')}`
 				}
 			})
 			return response.data
 		}
 		catch (e) {
 			return thunkApi.rejectWithValue(e)
+		}
+	}
+)
+
+export const getUserInfo = createAsyncThunk(
+	'users/userInfo',
+	async (id: number, thunkAPI) => {
+		try {
+			const response = await axios.get(`http://localhost:5000/users-inf/${id}`, {
+				headers: {
+					'Authorization': `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			return response.data
+		}
+		catch (e) {
+			return thunkAPI.rejectWithValue(e)
+		}
+	}
+)
+
+export const editUserInfo = createAsyncThunk(
+	'users/editUserInfo',
+	async (userInfo: IUserInfo, thunkAPI) => {
+		try {
+			const response = await axios.put('http://localhost:5000/users-inf', userInfo, {
+				headers: {
+					'Authorization': `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			return response.data
+		}
+		catch (e) {
+			return thunkAPI.rejectWithValue(e)
 		}
 	}
 )

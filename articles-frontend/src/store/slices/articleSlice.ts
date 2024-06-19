@@ -6,22 +6,20 @@ interface ArticleState {
 	isLoading: boolean,
 	currentArticle: IArticleWithId | undefined,
 	articles: IArticleWithId[],
-	filterArticles: IArticleWithId[],
+	filteredArticles: IArticleWithId[],
 	myArticles: IArticleWithId[],
 	status: number,
-	error: string | unknown,
-	filterOption: string
+	error: string | unknown
 }
 
 const initialState : ArticleState = {
 	isLoading: false,
 	currentArticle: {} as IArticleWithId,
 	articles: [],
-	filterArticles: [],
+	filteredArticles: [],
 	myArticles: [],
 	status: 0,
-	error: '',
-	filterOption: 'Все'
+	error: ''
 }
 
 const articleSlice = createSlice({
@@ -34,8 +32,13 @@ const articleSlice = createSlice({
 		},
 
 		filterArticles: (state, action: PayloadAction<string>) => {
-			state.filterArticles = state.articles.filter((article) => article.topic === action.payload)
-			state.filterOption = action.payload
+			if (action.payload !== 'Все') {
+				state.articles = state.filteredArticles
+					.filter((article) => article.topic.toLowerCase().includes(action.payload.toLowerCase()))
+			}
+			else {
+				state.articles = state.filteredArticles
+			}
 		}
 	},
 	extraReducers: (builder) => {
@@ -52,6 +55,7 @@ const articleSlice = createSlice({
 				state.isLoading = false;
 				state.error = '';
 				state.articles = action.payload;
+				state.filteredArticles = action.payload;
 			}
 		);
 

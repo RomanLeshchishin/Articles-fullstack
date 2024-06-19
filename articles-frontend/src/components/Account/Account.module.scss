@@ -1,0 +1,20 @@
+.container {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+}
+
+.input {
+  width: 500px;
+  --g-text-input-border-color: rgba(0, 0, 0, 0.24);
+  --g-text-input-border-width: 3px;
+  opacity: 1;
+  --g-text-input-border-radius: 34px;
+  --g-text-input-background-color: white;
+  --g-text-input-text-color: black;
+  --g-text-input-label-color: black;
+  --g-text-input-border-color-hover: rgba(0, 0, 0, 0.24);
+  --g-text-input-border-color-active: rgba(0, 0, 0, 0.24);
+}

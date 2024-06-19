@@ -12,7 +12,7 @@ const SelectTag = ({ valueTags, onChangeTags } : SelectTagProps) => {
 		{value: 'Figma', label: 'Figma'},
 		{value: 'UX/UI', label: 'UX/UI'},
 		{value: 'Персонализация', label: 'Персонализация'},
-		{value: 'КонтентМаркетинг', label: 'КонтентМаркетинг'},
+		{value: 'Контент маркетинг', label: 'Контент маркетинг'},
 		{value: 'Лидерство', label: 'Лидерство'},
 		{value: 'Управление проектами', label: 'Управление проектами'},
 		{value: 'Популяризация науки', label: 'Популяризация науки'},

@@ -31,9 +31,20 @@
   .navLinkBlock {
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 45px;
     justify-content: center;
     align-items: center;
+
+    .profileBlock {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+
+      .profileIcon {
+        width: 21px;
+        height: 21px;
+      }
+    }
 
     .navLink {
       @extend .textNav;
