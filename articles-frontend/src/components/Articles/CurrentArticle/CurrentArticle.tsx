@@ -22,7 +22,7 @@ const CurrentArticle = () => {
 		<div style={{display: "flex", flexDirection: "column", gap: "15px", width: "700px"}}>
 			<div className={styles.textLogin}>{currentArticle?.nickname}</div>
 			<div className={styles.textTitle}>{currentArticle?.title}</div>
-			<img src={`http://localhost:5000/file/${currentArticle?.fileIds}`} alt={currentArticle?.title}/>
+			<img src={`http://localhost:5000/file/download-file/${currentArticle?.fileIds}`} alt={currentArticle?.title}/>
 			<div style={{paddingBottom: "20px"}}>{currentArticle?.text}</div>
 		</div>
 	);

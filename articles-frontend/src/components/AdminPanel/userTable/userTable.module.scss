@@ -1,0 +1,19 @@
+@import "../../../styles/textFont.module";
+@import "../../../styles/customInput.module";
+@import "../../../styles/form.module";
+@import "../../../styles/customBtn.module";
+
+.btnAdminBlock {
+  display: flex;
+  justify-content: center;
+
+  .customBtnAdmin {
+    @extend .customButton;
+    padding: 10px;
+    text-decoration: none;
+  }
+
+  .customBtnAdmin:hover {
+    color: white;
+  }
+}

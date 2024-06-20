@@ -27,18 +27,18 @@ const CreateArticle = () => {
 		}
 	}
 
-	const sendForm = async () => {
+	const sendForm = () => {
 		if (!selectedFile) {
 			alert('Выберите файл')
 			return
 		}
 		const formFileData = new FormData()
 		formFileData.append('file', selectedFile)
-		await dispatch(saveFiles(formFileData))
+		dispatch(saveFiles(formFileData))
 	}
 
-	const onSubmit = async (data) => {
-		await sendForm()
+	const onSubmit = (data) => {
+		sendForm()
 		const token = localStorage.getItem('token')
 		if (token) {
 			const file = files[0]
@@ -53,7 +53,7 @@ const CreateArticle = () => {
 				checked: true
 			}
 			console.log(articleData)
-			await dispatch(createArticle(articleData))
+			dispatch(createArticle(articleData))
 		}
 	}
 

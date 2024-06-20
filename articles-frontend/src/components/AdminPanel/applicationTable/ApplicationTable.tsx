@@ -46,7 +46,7 @@ const ApplicationTable = () => {
 			dataIndex: 'file',
 			key: 'file',
 			render: (fileId) =>
-				<a href={`http://localhost:5000/file/${fileId}`}>
+				<a href={`http://localhost:5000/file/download-file/${fileId}`}>
 					загрузить заявку
 				</a>
 		}

@@ -4,6 +4,7 @@ import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux.ts";
 import {addUserRole, delUserRole, getUsers} from "../../../store/actions/userActions.ts";
 import {Role} from "../../../models/IUser.ts";
+import styles from "./userTable.module.scss";
 
 interface DataType {
 	key: string;
@@ -94,6 +95,11 @@ const UserTable = () => {
 	return (
 		<div>
 			<Table columns={columns} dataSource={data} />
+			<div className={styles.btnAdminBlock}>
+				<a href={`http://localhost:5000/file/download-excel`} className={styles.customBtnAdmin}>
+					загрузить таблицу с пользователями
+				</a>
+			</div>
 		</div>
 	);
 };

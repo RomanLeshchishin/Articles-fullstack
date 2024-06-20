@@ -11,7 +11,7 @@ const ArticleCard = ({ article } : ArticleCardProps) => {
 	return (
 		<div className={styles.card}>
 			<img
-				src={`http://localhost:5000/file/${article.fileIds[0]}`}
+				src={`http://localhost:5000/file/download-file/${article.fileIds[0]}`}
 				alt={article.fileIds[0].toString()}
 				className={styles.img}
 			/>
