@@ -1,6 +1,6 @@
 import {
 	Controller,
-	Get,
+	Get, Header,
 	HttpCode,
 	Param,
 	Post,
@@ -29,7 +29,7 @@ export class FileController {
 		return this.fileService.saveFiles(newFiles);
 	}
 
-	@Get('/:id')
+	@Get('/download-file/:id')
 	async getFileFromDatabaseById(@Param('id') id: number,  @Res({ passthrough: true }) response: Response) {
 		const file = await this.fileService.getFileById(id)
 		const stream = Readable.from(file.file)
@@ -39,13 +39,18 @@ export class FileController {
 			'Content-Type': getContentType(file.filename)
 		})
 
-		return new StreamableFile(stream)
+		return new StreamableFile(stream);
 	}
 
-	@Post('/create-excel')
-	async createExcelFile() {
-		const status = await this.fileService.createExcelFile()
-		return status;
+	@Get('/download-excel')
+	async createExcelFile(@Res({ passthrough: true }) response: Response) {
+		const date = new Date().getTime()
+		response.set({
+			'Content-Disposition': `inline; filename="users-${date}.xlsx"`,
+			'Content-Type': ''
+		})
+		const buffer = await this.fileService.createExcelFile()
+		return new StreamableFile(buffer);
 	}
 }
 

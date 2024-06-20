@@ -1,10 +1,9 @@
 import {HttpStatus, Injectable, NotFoundException} from '@nestjs/common';
 import {MFile} from "./MFile.class";
-import {v4 as uuidv4} from "uuid";
+import {utils, write} from 'xlsx';
 import sharp from "sharp";
 import {InjectModel} from "@nestjs/sequelize";
 import {UploadFile} from "./file.model";
-import ExcelJS from 'exceljs';
 import {UsersService} from "../users/users.service";
 import {IUserTable} from "./file.interface";
 import {ApplicationService} from "../application/application.service";
@@ -81,27 +80,16 @@ export class FileService {
 
 	async createExcelFile() {
 		const users = await this.usersService.getAllUsers()
-		// const applications = await Promise.all(users.map(async (user) => {
-		// 	const app = await this.applicationService.getApplicationByUserId(user.id)
-		// 	return app.fileId;
-		// }))
-		// console.log(applications)
-		const date = new Date().getTime()
-		const workbook = new ExcelJS.Workbook();
-		const worksheet = workbook.addWorksheet(`users`)
-		worksheet.columns = [
-			{ header: 'No', key: 'no'},
-			{ header: 'Name', key: 'name'},
-			{ header: 'Email', key: 'email'},
-			{ header: 'Roles', key: 'roles'}
-		]
-		let data: IUserTable[] = users.map((user, count) => {
-			return { no: count.toString(), name: user.name, email: user.email, roles: user.roles}
+		const columns = ['No', 'Name', 'Email', 'Roles']
+		let data = []
+		data.push(columns)
+		users.forEach((user, count) => {
+			data.push([count.toString(), user.name, user.email, user.roles.map((role) => role.value).join('|')])
 		})
-		data.forEach((val,i,_) => {
-			worksheet.addRow(val)
-		})
-		await workbook.xlsx.writeFile(`users-${date}.xlsx`)
-		return HttpStatus.OK;
+		const wb = utils.book_new()
+		const ws = utils.aoa_to_sheet(data)
+		utils.book_append_sheet(wb, ws, 'users')
+		const buf = write(wb, {type: "buffer", bookType: "xlsx"})
+		return buf;
 	}
 }
